@@ -7,11 +7,16 @@ const onButtonClick = () => {
 	updateCount();
 }
 
-const updateCount = () => document.getElementById("lines-of-code").innerHTML = linesOfCode;
+const updateCount = () => {
+	document.getElementById("lines-of-code").innerHTML = linesOfCode;
+    document.getElementById("extra-hands-btn").disabled = linesOfCode < 10;
+}
 
 const onBuyExtraHands = () => {
 	extraHands += 1;
 	updateHands();
+    linesOfCode -= 10;
+    updateCount();
 }
 
 const updateHands = () => document.getElementById("extra-hands").innerHTML = extraHands;
