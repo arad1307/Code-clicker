@@ -17,6 +17,11 @@ const onBuyExtraHands = () => {
 	updateHands();
     linesOfCode -= 10;
     updateCount();
+    updateExtraHandsCost();
 }
 
 const updateHands = () => document.getElementById("extra-hands").innerHTML = extraHands;
+
+const getExtraHandsCost = () => Math.round(10 * Math.pow(1.07, extraHands));
+
+const updateExtraHandsCost = () => document.getElementById("extra-hands-cost").innerHTML = getExtraHandsCost();
