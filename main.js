@@ -2,30 +2,26 @@ var linesOfCode = 0;
 var extraHands = 0;
 var codeMonkey = 0;
 
-const onButtonClick = () => {
-	linesOfCode += 1 + extraHands;
-	updateCount();
-}
+// getters
 
-const updateCount = () => {
-	document.getElementById("lines-of-code").innerHTML = linesOfCode;
-    document.getElementById("extra-hands-btn").disabled = linesOfCode < getExtraHandsCost();
-    document.getElementById("code-monkey-btn").disabled = linesOfCode < getCodeMonkeyCost();
+const getExtraHandsCost = () => Math.round(10 * Math.pow(1.07, extraHands));
+
+const getCodeMonkeyCost = () => Math.round(100 * Math.pow(1.07, codeMonkey));
+
+// button actions
+
+const onWriteCode = () => {
+    linesOfCode += 1 + extraHands;
+    updateCount();
 }
 
 const onBuyExtraHands = () => {
     linesOfCode -= getExtraHandsCost();
-	extraHands += 1;
-	updateHands();
+    extraHands += 1;
+    updateHands();
     updateCount();
     updateExtraHandsCost();
 }
-
-const updateHands = () => document.getElementById("extra-hands").innerHTML = extraHands;
-
-const getExtraHandsCost = () => Math.round(10 * Math.pow(1.07, extraHands));
-
-const updateExtraHandsCost = () => document.getElementById("extra-hands-cost").innerHTML = getExtraHandsCost();
 
 const onBuyCodeMonkey = () => {
     linesOfCode -= updateCodeMonkeyCost();
@@ -34,7 +30,18 @@ const onBuyCodeMonkey = () => {
     updateCount();
 }
 
-const getCodeMonkeyCost = () => Math.round(100 * Math.pow(1.07, codeMonkey));
+// DOM updates
+
+const updateCount = () => {
+	document.getElementById("lines-of-code").innerHTML = linesOfCode;
+    document.getElementById("extra-hands-btn").disabled = linesOfCode < getExtraHandsCost();
+    document.getElementById("code-monkey-btn").disabled = linesOfCode < getCodeMonkeyCost();
+}
+
+const updateHands = () => document.getElementById("extra-hands").innerHTML = extraHands;
+
+const updateExtraHandsCost = () => document.getElementById("extra-hands-cost").innerHTML = getExtraHandsCost();
+
 
 const updateCodeMonkey = () => document.getElementById("code-monkey").innerHTML = codeMonkey;
 
